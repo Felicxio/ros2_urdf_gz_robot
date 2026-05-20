@@ -24,6 +24,7 @@
     <gazebo>
         <plugin filename="gz-sim-joint-state-publisher-system"
                 name="gz::sim::systems::JointStatePublisher">
+                <topic>/world/test_world/model/my_robot/joint_state</topic>
                 <joint_name>left_wheel_joint</joint_name>
                 <joint_name>right_wheel_joint</joint_name>
         </plugin>
