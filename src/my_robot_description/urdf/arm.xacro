@@ -18,6 +18,14 @@
             <origin xyz="0 0 ${arm_base_height/2.0}" rpy="0 0 0"/>
             <material name="orange"/>
         </visual>
+        <collision>
+            <geometry>
+                <box size="${arm_base_length} ${arm_base_width} ${arm_base_height}" />
+            </geometry>
+            <origin xyz="0 0 ${arm_base_height/2.0}" rpy="0 0 0"/>
+        </collision>
+        <xacro:box_inertia m="0.5" x="${arm_base_length}" y="${arm_base_width}" z="${arm_base_height}"
+                            o_xyz="0 0 ${arm_base_height/2.0}" o_rpy="0 0 0"/>
     </link>
 
     <link name="forearm_link">
@@ -28,6 +36,14 @@
             <origin xyz="0 0 ${(forearm_length/2.0)}" rpy="0 0 0"/>
             <material name="yellow"/>
         </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="${forearm_radius}" length="${forearm_length}" />
+            </geometry>
+            <origin xyz="0 0 ${(forearm_length/2.0)}" rpy="0 0 0"/>
+        </collision>
+        <xacro:wheel_inertia m="0.3" radius="${forearm_radius}" length="${forearm_length}"
+                            o_xyz="0 0 ${(forearm_length/2.0)}" o_rpy="0 0 0"/>
     </link>
 
     <link name="hand_link">
@@ -38,6 +54,14 @@
             <origin xyz="0 0 ${hand_length/2.0}" rpy="0 0 0"/>
             <material name="orange"/>
         </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="${hand_radius}" length="${hand_length}" />
+            </geometry>
+            <origin xyz="0 0 ${hand_length/2.0}" rpy="0 0 0"/>
+        </collision>
+        <xacro:wheel_inertia m="0.3" radius="${hand_radius}" length="${hand_length}"
+                            o_xyz="0 0 ${(hand_length/2.0)}" o_rpy="0 0 0"/>
     </link>
 
     <joint name="arm_base_forearm_joint" type="revolute">
@@ -46,6 +70,7 @@
         <origin xyz="0 0 ${arm_base_height}" rpy="0 0 0" />
         <axis xyz="0 1 0" />
         <limit lower="0" upper="${pi/2.0}" effort="100" velocity="100" />
+        <dynamics friction="0.3" damping="0.3"/>
     </joint>
 
     <joint name="forearm_hand_joint" type="revolute">
@@ -54,6 +79,7 @@
         <origin xyz="0 0 ${forearm_length}" rpy="0 0 0" />
         <axis xyz="0 1 0" />
         <limit lower="0" upper="${pi/2.0}" effort="100" velocity="100" />
+        <dynamics friction="0.3" damping="0.3"/>
     </joint>
 
 </robot>
